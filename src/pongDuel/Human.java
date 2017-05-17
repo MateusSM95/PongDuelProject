@@ -21,10 +21,15 @@ public class Human extends Agent implements blockChangeListener, Runnable{
     int t = 0;
     DuelWorldPanel duelWorldPanel;
     Block block;
+    int id;
+    int score = 0;
+    boolean isGoal = false;
+    
     boolean dPressed,uPressed,lPressed,rPressed = false;
-    public Human(Block block,DuelWorldPanel duelWorldPanel) {
+    public Human(int id,Block block,DuelWorldPanel duelWorldPanel) {
         Thread thread = new Thread(this);
         thread.start();
+        this.id = id;
         this.block = block;
         this.duelWorldPanel = duelWorldPanel;
     }
@@ -87,19 +92,19 @@ public class Human extends Agent implements blockChangeListener, Runnable{
         while(true){
             if(dPressed){
                 t+=1;
-                block.move(t,backward);           
+                block.moveBlock(t,block,backward);           
             }
             if(uPressed){
                 t+=1;
-                block.move(t,forward);
+                block.moveBlock(t,block,forward);
             }
             if(lPressed){
                 t+=1;
-                block.move(t,left);
+                block.moveBlock(t,block,left);
             }
             if(rPressed){
                 t+=1;
-                block.move(t,right);
+                block.moveBlock(t,block,right);
             }
             try {
                 Thread.sleep(50);
@@ -108,12 +113,35 @@ public class Human extends Agent implements blockChangeListener, Runnable{
             }
             blockMoved();
         }
-        
     }
 
     @Override
     public void move(int t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getT() {
+        return t;
+    }
+
+    public void setT(int t) {
+        this.t = t;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isIsGoal() {
+        return isGoal;
+    }
+
+    public void setIsGoal(boolean isGoal) {
+        this.isGoal = isGoal;
     }
     
 }
