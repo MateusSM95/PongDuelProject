@@ -60,5 +60,8 @@ public class DuelWorldPanel extends JPanel{
         ball.paint(g);
         player1.block.paint(g);
         player2.block.paint(g);
+        ball.moveBall(t, player1.block, player2.block);
+        player1.move(t);
+        player2.move(t);
     }
 }

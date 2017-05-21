@@ -106,6 +106,7 @@ public class Human extends Agent implements blockChangeListener, Runnable{
                 t+=1;
                 block.moveBlock(t,block,right);
             }
+            System.out.println("t:"+t);
             try {
                 Thread.sleep(50);
             } catch (InterruptedException ex) {
@@ -117,7 +118,6 @@ public class Human extends Agent implements blockChangeListener, Runnable{
 
     @Override
     public void move(int t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getT() {

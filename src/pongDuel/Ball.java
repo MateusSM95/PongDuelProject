@@ -14,11 +14,12 @@ import java.awt.Graphics;
 public class Ball extends Object {
     Graphics g;
     int t = 0;
-    double x = 0;
-    double y = 0;
+    double x = 4;
+    double y = 169;
     double frameWidth, frameHight;
     boolean xPositive = true;
     boolean yPositive = true;
+    double velocity= 4;
 
     public Ball(double x, double y,double frameWidth, double frameHight) {
         this.frameWidth = frameWidth;
@@ -33,24 +34,25 @@ public class Ball extends Object {
     @Override
     public void moveBall(int t, Block blockP1, Block blockP2) {
         playerCollider(blockP1, blockP2);
+        //System.out.println("x:"+x+"Positive:"+xPositive);
         if (xPositive) {
-            this.x += 1;
-            if (this.x >= this.frameWidth - 10) {
+            this.x += velocity;
+            if (this.x >= this.frameWidth) {
                 xPositive = false;
             }
         } else {
-            this.x -= 1;
+            this.x -= velocity;
             if (this.x <= 0) {
                 this.xPositive = true;
             }
         }
         if (yPositive) {
-            this.y += 1;
-            if (this.y >= frameHight - 10) {
+            this.y += velocity;
+            if (this.y >= frameHight) {
                 yPositive = false;
             }
         } else {
-            this.y -= 1;
+            this.y -= velocity;
             if (this.y <= 0) {  
                 yPositive = true;
             }
@@ -58,11 +60,21 @@ public class Ball extends Object {
     }
 
     public void playerCollider(Block blockP1, Block blockP2) {
-        if ((Math.abs(blockP1.x - this.x) >= 0 && (Math.abs(blockP1.x - this.x) <= 5)) && (Math.abs(blockP1.y - this.y) >= 0 && Math.abs(blockP1.y - this.y) <= 20)) {
-            this.xPositive = false;
+        if ((Math.abs(blockP1.x - this.x) >= 0 && (Math.abs(blockP1.x - this.x) <= 1)) && (Math.abs(blockP1.y - this.y) >= 0 && Math.abs(blockP1.y - this.y) <= blockP1.height/2)) {
+            if(this.xPositive){
+                this.xPositive = false;
+            }
+            else{
+                this.xPositive = true;
+            }
         }
-        if ((Math.abs(blockP2.x - this.x) >= 0 && (Math.abs(blockP2.x - this.x) <= 5)) && (Math.abs(blockP2.y - this.y) >= 0 && Math.abs(blockP2.y - this.y) <= 20)) {
-            this.xPositive = true;
+        if ((Math.abs(blockP2.x - this.x) >= 0 && (Math.abs(blockP2.x - this.x) <= blockP1.width)) && (Math.abs(blockP2.y - this.y) >= 0 && Math.abs(blockP2.y - this.y) <= blockP1.height/2)) {
+            if(this.xPositive){
+                this.xPositive = false;
+            }
+            else{
+                this.xPositive = true;
+            }
         }
     }
 
