@@ -30,9 +30,10 @@ public class DuelWorldPanel extends JPanel{
     public DuelWorldPanel(DuelWorld duelWorld) {
         this.duelWorld = duelWorld;
         this.blockList = duelWorld.blockList;
-        setFocusable(true);
-        setFocusTraversalKeysEnabled(false);
-        this.setPreferredSize(new Dimension(duelWorld.frameWidth, duelWorld.frameHeight));// changed it to preferredSize, Thanks!
+        JPanel jPanel = duelWorld.getJPanel();
+        jPanel.setFocusable(true);
+        jPanel.setFocusTraversalKeysEnabled(false);
+        jPanel.setPreferredSize(new Dimension(duelWorld.frameWidth, duelWorld.frameHeight));// changed it to preferredSize, Thanks!
         duelWorld.getContentPane().add( this );// adding to content pane will work here. Please read the comment bellow.
         duelWorld.pack();
         duelWorld.setVisible(true);
@@ -41,8 +42,9 @@ public class DuelWorldPanel extends JPanel{
         this.ball = duelWorld.ball;
         player1 = new Human(1,blockList.get(0),this);
         player2 = new Human(2,blockList.get(1),this);
-        addKeyListener((KeyListener) this.player1);
-        addKeyListener((KeyListener) this.player2);
+        jPanel.requestFocus();
+        jPanel.addKeyListener((KeyListener) this.player1);
+        jPanel.addKeyListener((KeyListener) this.player2);
     }
     @Override
     public void paintComponent(Graphics g){
