@@ -27,17 +27,25 @@ public class Block extends Object {
     }
 
     public void paint(Graphics g) {
-        g.drawLine((int) this.x, (int) this.y, (int) this.x, (int) (this.y+height/2));//;
-        g.drawLine((int) this.x, (int) (this.y+height/2), (int) (this.x+width),(int) (this.y+height/2));//_
-        g.drawLine((int) this.x, (int) this.y, (int) this.x, (int) (this.y-height/2));//:
-        g.drawLine((int) this.x, (int) (this.y-height/2), (int) (this.x+width),(int) (this.y-height/2));//-
-        g.drawLine((int) (this.x+width), (int) (this.y-height/2), (int) (this.x+width),(int) (this.y+height/2));//-
+        if(playerNumber == 1){
+            g.drawLine((int) this.x, (int) this.y, (int) this.x, (int) (this.y+height/2));//;
+            g.drawLine((int) this.x, (int) (this.y+height/2), (int) (this.x-width),(int) (this.y+height/2));//_
+            g.drawLine((int) this.x, (int) this.y, (int) this.x, (int) (this.y-height/2));//:
+            g.drawLine((int) this.x, (int) (this.y-height/2), (int) (this.x-width),(int) (this.y-height/2));//-
+            g.drawLine((int) (this.x-width), (int) (this.y-height/2), (int) (this.x-width),(int) (this.y+height/2));//-
+        }else{
+            g.drawLine((int) this.x, (int) this.y, (int) this.x, (int) (this.y+height/2));//;
+            g.drawLine((int) this.x, (int) (this.y+height/2), (int) (this.x+width),(int) (this.y+height/2));//_
+            g.drawLine((int) this.x, (int) this.y, (int) this.x, (int) (this.y-height/2));//:
+            g.drawLine((int) this.x, (int) (this.y-height/2), (int) (this.x+width),(int) (this.y-height/2));//-
+            g.drawLine((int) (this.x+width), (int) (this.y-height/2), (int) (this.x+width),(int) (this.y+height/2));//-
+        }
     }
 
     public boolean willBeOutOfBoundaries(double intentX,double intentY) {
         DuelWorld duelWorld = DuelWorld.getInstance();
-        double frameWidth = duelWorld.getFrameWidth();
-        double framHeight = duelWorld.getFrameHeight();
+        double frameWidth = duelWorld.getPanelWidth();
+        double framHeight = duelWorld.getPanelHeight();
         if(playerNumber == 2){
             if ((intentX < frameWidth/ 2) || (intentY >= (framHeight - (this.height/2 -5))) || intentY <= 5 || (intentX >= frameWidth)) {
             outOfBound = true;

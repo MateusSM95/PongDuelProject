@@ -15,7 +15,7 @@ public class Ball extends Object {
     Graphics g;
     int t = 0;
     double x = 4;
-    double y = 169;
+    double y;
     double frameWidth, frameHight;
     boolean xPositive = true;
     boolean yPositive = true;
@@ -24,6 +24,7 @@ public class Ball extends Object {
     public Ball(double x, double y,double frameWidth, double frameHight) {
         this.frameWidth = frameWidth;
         this.frameHight = frameHight;
+        this.y = frameHight/2;
     }
     @Override
     public void paint(Graphics g) {
@@ -37,7 +38,7 @@ public class Ball extends Object {
         //System.out.println("x:"+x+"Positive:"+xPositive);
         if (xPositive) {
             this.x += velocity;
-            if (this.x >= this.frameWidth) {
+            if (this.x >= this.frameWidth -10) {
                 xPositive = false;
             }
         } else {
@@ -48,32 +49,29 @@ public class Ball extends Object {
         }
         if (yPositive) {
             this.y += velocity;
-            if (this.y >= frameHight) {
+            if (this.y >= frameHight -10){
                 yPositive = false;
             }
         } else {
             this.y -= velocity;
-            if (this.y <= 0) {  
+            if (this.y <= 2) {  
                 yPositive = true;
             }
         }
     }
 
     public void playerCollider(Block blockP1, Block blockP2) {
-        if ((Math.abs(blockP1.x - this.x) >= 0 && (Math.abs(blockP1.x - this.x) <= 1)) && (Math.abs(blockP1.y - this.y) >= 0 && Math.abs(blockP1.y - this.y) <= blockP1.height/2)) {
-            if(this.xPositive){
-                this.xPositive = false;
+        if(this.x <= frameWidth/2){//do lado do P1
+            if ((Math.abs(blockP1.x - this.x) <= 3) && (Math.abs(blockP1.y - this.y) <= blockP1.height/2 )) {
+                if(!this.xPositive){
+                    this.xPositive = true;
+                }
             }
-            else{
-                this.xPositive = true;
-            }
-        }
-        if ((Math.abs(blockP2.x - this.x) >= 0 && (Math.abs(blockP2.x - this.x) <= blockP1.width)) && (Math.abs(blockP2.y - this.y) >= 0 && Math.abs(blockP2.y - this.y) <= blockP1.height/2)) {
-            if(this.xPositive){
-                this.xPositive = false;
-            }
-            else{
-                this.xPositive = true;
+        }else{//do lado do P2
+            if ((Math.abs(blockP2.x - this.x) <= 3) && (Math.abs(blockP2.y - this.y) <= blockP1.height/2 )) {
+                if(this.xPositive){
+                    this.xPositive = false;
+                }
             }
         }
     }

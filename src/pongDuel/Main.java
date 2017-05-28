@@ -13,16 +13,19 @@ public class Main {
     public static void main(String[] args){
         double blockX,blockY,velocity;
         double block1X,block1Y,velocity1;
-        blockX = 1;
-        blockY = 169;
-        block1X = 410;
-        block1Y = 169;
+        double panelWidth,panelHight;
+        panelWidth = 654;
+        panelHight = 434;
+        blockX = 8;
+        blockY = panelHight/2;
+        block1X = panelWidth-8;
+        block1Y = panelHight/2;
         velocity = 10;
         velocity1 = 10;
         
-        Ball ball = new Ball(2,169,404,327);
+        Ball ball = new Ball(2,169,panelWidth,panelHight);
         Block block1 = new Block(blockX,blockY,velocity,5,30,1);
         Block block2 = new Block(block1X,block1Y,velocity1,5,30,2);
-        DuelWorld duelWorld = new DuelWorld(416,339,block1,block2,ball);
+        DuelWorld duelWorld = new DuelWorld(panelWidth,panelHight,block1,block2,ball);
     }
 }
